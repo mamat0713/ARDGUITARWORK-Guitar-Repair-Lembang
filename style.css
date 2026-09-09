@@ -16,7 +16,7 @@ h1, h2, h3, .navbar-brand {
     border-bottom: 1px solid #222;
 }
 
-/* Hero section menggunakan foto lokal lu: IMG_9436.png */
+/* Hero section menggunakan foto lokal lu */
 .hero-section {
     position: relative;
     padding: 120px 0;
@@ -99,10 +99,10 @@ h1, h2, h3, .navbar-brand {
     animation: fadeInAd 0.3s ease-out;
 }
 
-/* Kotak iklannya */
+/* Kotak iklannya + Efek Kelap-Kelip Ugal-Ugalan */
 .fake-ad-box {
     background: #1a1a1a;
-    border: 2px solid #ffc107;
+    border: 3px solid #ffc107;
     border-radius: 12px;
     padding: 25px;
     width: 90%;
@@ -111,7 +111,9 @@ h1, h2, h3, .navbar-brand {
     color: #ffffff;
     position: relative;
     box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-    animation: popUpAd 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    
+    /* Kombinasi animasi pop-up awal + animasi kelap-kelip border terus-menerus */
+    animation: popUpAd 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-blink 1.2s infinite;
 }
 
 /* Tombol close (silang) ala iklan */
@@ -134,7 +136,20 @@ h1, h2, h3, .navbar-brand {
     from { opacity: 0; }
     to { opacity: 1; }
 }
+
 @keyframes popUpAd {
     from { transform: scale(0.7); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
+}
+
+/* --- ANIMASI KELAP-KELIP BORDER IKLAN --- */
+@keyframes border-blink {
+    0%, 100% {
+        border-color: #ffc107; /* Kuning emas */
+        box-shadow: 0 0 10px rgba(255, 193, 7, 0.4);
+    }
+    50% {
+        border-color: #ffffff; /* Putih terang menyilaukan */
+        box-shadow: 0 0 25px rgba(255, 255, 255, 0.8), 0 0 50px rgba(255, 0, 0, 0.6); /* Efek glow merah & putih */
+    }
 }
