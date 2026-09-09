@@ -153,3 +153,44 @@ h1, h2, h3, .navbar-brand {
         box-shadow: 0 0 25px rgba(255, 255, 255, 0.8), 0 0 50px rgba(255, 0, 0, 0.6); /* Efek glow merah & putih */
     }
 }
+
+/* tutor */
+/* --- IKON MENGAMBANG DI POJOK KANAN BAWAH --- */
+.diy-easter-egg {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #1a1a1a;
+    border: 2px solid #ffc107;
+    color: #ffc107;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+    z-index: 998; /* Di bawah pop-up iklan, tapi di atas konten */
+    transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+    text-decoration: none;
+}
+
+.diy-easter-egg:hover {
+    transform: scale(1.1);
+    background-color: #ffc107;
+    color: #0d0d0d;
+}
+
+
+/* maksa orange */
+/* Paksa warna oranye Shopee biar gak gelap/hilang */
+        .btn-shopee {
+            background-color: #EE4D2D !important;
+            border-color: #EE4D2D !important;
+            color: #ffffff !important;
+        }
+        .btn-shopee:hover {
+            background-color: #d73211 !important;
+            border-color: #d73211 !important;
+            color: #ffffff !important;
+        }
