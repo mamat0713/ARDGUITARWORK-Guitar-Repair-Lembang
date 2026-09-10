@@ -1,28 +1,16 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+    <link rel="icon" type="image/png" href="ard guitar logo.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ARD Guitar Workshop | Custom Tools & Gear</title>
-    
-    <!-- SEO META TAGS -->
-    <meta name="description" content="Workshop lutherie profesional spesialis refret stainless steel, fret leveling, action adjustment, dan produsen custom guitar tools berkualitas tinggi.">
-    <meta name="keywords" content="ARD Guitar Workshop, servis gitar bandung, refret gitar, fret leveling, custom fret press tool, shopee ard guitar">
-    <meta name="robots" content="index, follow">
-    <meta name="google-site-verification" content="eikyC4Frw0ihDED9dW1xSRHUsEPd9svZgUDE8w5ktls" />
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="ard guitar logo.png">
-
     <!-- Bootstrap 5 CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    
     <!-- Hubungkan ke CSS Terpisah -->
     <link rel="stylesheet" href="style.css">
-    
     <style>
         /* Efek hover untuk card produk */
         .card-custom {
@@ -32,7 +20,6 @@
             transform: translateY(-5px);
             border-color: #ffc107 !important;
         }
-        
         /* Tombol khas warna oranye Shopee dengan teks putih */
         .btn-shopee {
             background-color: #EE4D2D;
@@ -187,6 +174,77 @@
         </div>
     </div>
 
+    <!-- live aktivasi -->
+     <!-- KODE NOTIFIKASI SLIDE KECIL DARI KANAN KE KIRI -->
+<div id="slideNotification" style="position: fixed; bottom: 25px; right: -350px; background-color: #1a1a1a; color: #e0e0e0; border-left: 4px solid #ffc107; padding: 12px 18px; border-radius: 6px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); z-index: 9999; font-family: 'Inter', sans-serif; font-size: 13px; max-width: 300px; transition: right 0.5s ease-in-out;">
+    <span style="color: #ffc107; font-weight: bold; display: block; margin-bottom: 2px; font-size: 11px; text-transform: uppercase;">🔥 Update Workshop</span>
+    <span id="slideText">Memuat aktivitas...</span>
+</div>
+
+<!-- SCRIPT SENSOR NAMA & LOOPING DATA ADMIN -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const notifBox = document.getElementById('slideNotification');
+        const notifText = document.getElementById('slideText');
+
+        if (!notifBox) return;
+
+        // Fungsi buat sensor nama (2 huruf depan, sisanya bintang)
+        function sensorNama(namaAsli) {
+            if (!namaAsli) return "Anonim";
+            
+            // Ambil kata pertama (buat jaga-jaga kalau ada nama panjang / pakai kota kayak "Rian (Bandung)")
+            let bagianNama = namaAsli.split(' ')[0]; 
+
+            if (bagianNama.length <= 2) {
+                return bagianNama + "***";
+            }
+
+            let duaHuruf = bagianNama.substring(0, 2);
+            let bintang = "*".repeat(bagianNama.length - 2);
+            
+            // Kalau ada keterangan tambahan di belakang (misal kota), gabungin lagi
+            let sisaTeks = namaAsli.replace(bagianNama, "").trim();
+            
+            return `${duaHuruf}${bintang} ${sisaTeks}`;
+        }
+
+        function showNotification() {
+            let savedData = JSON.parse(localStorage.getItem('ard_customers'));
+
+            if (!savedData || savedData.length === 0) {
+                savedData = [
+                    { name: 'Rangga', service: 'Fret Leveling', guitar: 'Gitar Elektrik' },
+                    { name: 'Yoga Pratama', service: 'Refret Stainless', guitar: 'Stratocaster' }
+                ];
+            }
+            const index = Math.floor(Date.now() / 8000) % savedData.length;
+            const item = savedData[index];
+
+            // Sensor nama customer-nya
+            const namaSensor = sensorNama(item.name);
+
+            // Masukin teks ke kotak notif
+            notifText.innerHTML = `<strong>${namaSensor}</strong> sudah melakukan <strong>${item.service}</strong> (${item.guitar}).`;
+
+            // Geser masuk dari kanan ke kiri
+            notifBox.style.right = '20px';
+
+            // Geser balik ke kanan (sembunyi) setelah 4.5 detik
+            setTimeout(() => {
+                notifBox.style.right = '-350px';
+            }, 4500);
+        }
+
+        // Muncul pertama kali setelah 2 detik
+        setTimeout(showNotification, 2000);
+
+        // Looping tiap 10 detik
+        setInterval(showNotification, 10000);
+    });
+</script>
+     <!-- live aktivasi -->
+
     <!-- Bootstrap 5 JS Bundle CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     
@@ -213,55 +271,6 @@
             });
         });
     </script>
-    <!-- KODE NOTIFIKASI SLIDE KECIL (AMAN TANPA PANEL ADMIN) -->
-<div id="slideNotification" style="position: fixed; bottom: 25px; right: -350px; background-color: #1a1a1a; color: #e0e0e0; border-left: 4px solid #ffc107; padding: 12px 18px; border-radius: 6px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); z-index: 9999; font-family: 'Inter', sans-serif; font-size: 13px; max-width: 300px; transition: right 0.5s ease-in-out;">
-    <span style="color: #ffc107; font-weight: bold; display: block; margin-bottom: 2px; font-size: 11px; text-transform: uppercase;">🔥 Update Workshop</span>
-    <span id="slideText">Memuat aktivitas...</span>
-</div>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const notifBox = document.getElementById('slideNotification');
-        const notifText = document.getElementById('slideText');
-
-        if (!notifBox) return;
-
-        function sensorNama(namaAsli) {
-            if (!namaAsli) return "Anonim";
-            let bagianNama = namaAsli.split(' ')[0]; 
-            if (bagianNama.length <= 2) return bagianNama + "***";
-            let duaHuruf = bagianNama.substring(0, 2);
-            let bintang = "*".repeat(bagianNama.length - 2);
-            return `${duaHuruf}${bintang}`;
-        }
-
-        function showNotification() {
-            // Data dummy aman buat preview sebelum panel admin di-upload
-            const dummyData = [
-                { name: 'Rian', service: 'Refret Stainless', guitar: 'Stratocaster' },
-                { name: 'Yoga', service: 'Fret Leveling', guitar: 'Ibanez RG' },
-                { name: 'Bayu', service: 'Order Fret Press Tool', guitar: 'Shopee Buyer' }
-            ];
-
-            const index = Math.floor(Date.now() / 8000) % dummyData.length;
-            const item = dummyData[index];
-            const namaSensor = sensorNama(item.name);
-
-            notifText.innerHTML = `<strong>${namaSensor}</strong> baru saja memesan <strong>${item.service}</strong> (${item.guitar}).`;
-
-            // Muncul dari kanan
-            notifBox.style.right = '20px';
-
-            // Masuk lagi ke kanan setelah 4.5 detik
-            setTimeout(() => {
-                notifBox.style.right = '-350px';
-            }, 4500);
-        }
-
-        setTimeout(showNotification, 2000);
-        setInterval(showNotification, 10000);
-    });
-</script>
 
     <!-- Hubungkan ke JS Terpisah -->
     <script src="script.js"></script>
